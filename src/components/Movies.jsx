@@ -1,23 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import { selectMovies } from "../features/movie/movieSlice";
+import { useSelector } from "react-redux";
 
 function Movies() {
+  //This is using the database stored i.e from movieSlice
+
+  const movies = useSelector(selectMovies);
+
+  console.log("This is movies", movies);
+
   return (
     <Container>
       <h4>Recommended for You</h4>
       <Content>
-        <Wrap>
-          <img src="/images/slider-badag.jpg" alt="" />
-        </Wrap>
-        <Wrap>
-          <img src="/images/slider-badag.jpg" alt="" />
-        </Wrap>
-        <Wrap>
-          <img src="/images/slider-badag.jpg" alt="" />
-        </Wrap>
-        <Wrap>
-          <img src="/images/slider-badag.jpg" alt="" />
-        </Wrap>
+        {movies &&
+          movies.map((movie) => ( // because of this function we looped through.
+            <Wrap key={movie.id}>
+              <img src={movie.cardImg} alt="" />
+            </Wrap>
+          ))}
+
       </Content>
     </Container>
   );

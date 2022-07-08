@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
+import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Routes>  {/* Anything inside Routes will  always change.*/}
           <Route path="/" element={<Home />}/>
           <Route path="/detail" element={<Detail />}/>
+          <Route path="/login" element = {<Login/>}/>
         </Routes>
       </BrowserRouter>
     </div>
