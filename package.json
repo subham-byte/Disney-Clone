@@ -1,8 +1,8 @@
 {
   "name": "disney-plus-clone",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -15,6 +15,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "save-dev": "^0.0.1-security",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
