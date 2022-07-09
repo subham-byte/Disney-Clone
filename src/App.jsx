@@ -15,7 +15,7 @@ function App() {
         <Header />  {/* This will always be visible i.e. upon navigating through websites. */}
         <Routes>  {/* Anything inside Routes will  always change.*/}
           <Route path="/" element={<Home />}/>
-          <Route path="/detail" element={<Detail />}/>
+          <Route path="/detail/:id" element={<Detail />}/>
           <Route path="/login" element = {<Login/>}/>
         </Routes>
       </BrowserRouter>

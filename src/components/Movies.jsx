@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { selectMovies } from "../features/movie/movieSlice";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom"; //it surrounds the whole object inside it with a tag
 
 function Movies() {
   //This is using the database stored i.e from movieSlice
 
   const movies = useSelector(selectMovies);
 
-  console.log("This is movies", movies);
+  // console.log("This is movies", movies);
 
   return (
     <Container>
@@ -17,7 +18,9 @@ function Movies() {
         {movies &&
           movies.map((movie) => ( // because of this function we looped through.
             <Wrap key={movie.id}>
+              <Link to={`/detail/${movie.id}`}>
               <img src={movie.cardImg} alt="" />
+              </Link>
             </Wrap>
           ))}
 

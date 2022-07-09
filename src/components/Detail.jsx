@@ -1,40 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import db from "../firebase";
 
 function Detail() {
+  const { id } = useParams();
+  console.log(id);
+
+  const [movie, setMovie] = useState();
+  useEffect(() => {
+    // Grab the movie info from DB
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          //save the movie data
+          setMovie(doc.data());
+        } else {
+          //redirect to home page
+        }
+      });
+    console.log("hello");
+  }, [id]);
+
+  console.log("Movie is", movie);
+
   return (
     <Container>
-      <Background>
-        <img src="images/background.jpg" alt="" />
-      </Background>
-      <ImageTitle>
-        <img src="/images/viewers-disney.png" alt="" />
-      </ImageTitle>
-      <Controls>
-        <PlayButton>
-          <img src="/images/play-icon-black.png" alt="" />
-          <span>PLAY</span>
-        </PlayButton>
-        <TrailerButton>
-          <img src="/images/play-icon-white.png" alt="" />
-          <span>Trailer</span>
-        </TrailerButton>
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-        <GroupWatchButton>
-          <img src="/images/group-icon.png" alt="" />
-        </GroupWatchButton>
-      </Controls>
-      <SubTitle>2018 * 7m * Family, Fantasy, Kids, Animation</SubTitle>
-      <Description>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore odio
-        nulla, amet, architecto nobis, consequuntur quae dolorem magnam aliquam
-        quia veritatis nostrum nesciunt itaque a sequi facilis expedita id.
-        Aperiam earum placeat fugit. Repellat dolores aut esse libero minima
-        maiores commodi atque quod quisquam nisi, dolorem aperiam consequatur
-        dolor quos.
-      </Description>
+      {movie && (
+        <>
+          <Background>
+            <img src={movie.backgroundImg} alt="" />
+          </Background>
+          <ImageTitle>
+            <img src={movie.titleImg} alt="" />
+          </ImageTitle>
+          <Controls>
+            <PlayButton>
+              <img src="/images/play-icon-black.png" alt="" />
+              <span>PLAY</span>
+            </PlayButton>
+            <TrailerButton>
+              <img src="/images/play-icon-white.png" alt="" />
+              <span>Trailer</span>
+            </TrailerButton>
+            <AddButton>
+              <span>+</span>
+            </AddButton>
+            <GroupWatchButton>
+              <img src="/images/group-icon.png" alt="" />
+            </GroupWatchButton>
+          </Controls>
+          <SubTitle>{movie.subTitle}</SubTitle>
+          <Description>{movie.description}</Description>
+        </>
+      )}
     </Container>
   );
 }
@@ -131,16 +152,16 @@ const GroupWatchButton = styled(AddButton)`
 `;
 
 const SubTitle = styled.div`
-color: rgb(249, 249, 249);
-font-size: 15px;
-min-height: 20px;
-margin-top: 26px;
-` 
+  color: rgb(249, 249, 249);
+  font-size: 15px;
+  min-height: 20px;
+  margin-top: 26px;
+`;
 
 const Description = styled.div`
- line-height: 1.4;
- font-size: 20px;
- margin-top: 16px;
- color: rgb(249, 249, 249);
- max-width: 700px;
-`
+  line-height: 1.4;
+  font-size: 20px;
+  margin-top: 16px;
+  color: rgb(249, 249, 249);
+  max-width: 700px;
+`;
